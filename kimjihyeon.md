@@ -113,3 +113,125 @@ public class StringOperation {
 	}
 
 }
+
+
+5/3 3일차
+
+public class Variable {
+
+	public static void main(String[] args) {
+		
+		int a = 1; // Number -> integer(정수) ... -2, -1, 0, 1, 2 ...
+		System.out.println(a);
+		
+//		int b = 1.1; 1.1은 정수가 아니기 때문에 오류남
+	    double b = 1.1; // real number-> double(실수) ... -2.0, -1.0, 0, 1.0, 2.0 ...
+	    System.out.println(b);
+	    
+	    String c = "Hello World";
+	    System.out.println(c);
+		
+	    // 데이터 타입을 지정하는 이유 - 변수의 데이터 타입을 바로바로 판단할 수 있기 때문이
+	}
+
+}
+
+public class Letter {
+
+	public static void main(String[] args) {
+		String name = "leezche";
+		System.out.println("Hello, "+name+" ... "+name+" ... egoing ... bye");
+//		변수를 지정하면, 효율적으로 처리할 수 있음 
+		
+		double VAT = 10.0;
+		System.out.println(VAT);
+//		가독성과 재사용을 위해 변수를 이용하는 것은 중요한 수단 중 하나
+
+	}
+
+}
+
+public class Casting {
+
+	public static void main(String[] args) {
+		double a = 1.1;
+		double b = 1; // 손실이 없기 때문에 가능 
+	    double b2 = (double) 1;
+		System.out.println(b);
+		
+//		int c = 1.1; 에러남 
+		double d = 1.1; // double 형으로 바꿔줌 
+		int e = (int) 1.1; // 강제로 int 형으로 바꿔줌(손실이 일어남)
+		System.out.println(e);
+		
+		// 1 to String 
+		String f = Integer.toString(1); // 1을 문자열로 만들어줌(검색) 
+		System.out.println(f.getClass());  // 변수가 갖고 있는 값이 어떤 타입인지 알려
+
+	}
+
+}
+
+// 프로그램 - 시간의 순서에 따라서 어떤 일이 일어나는 것 
+// 프로그램을 만드는 이유는 자동화를 하기 위해서 이다
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		System.out.println(1);
+		System.out.println(2);
+		System.out.println(3);
+		
+	}
+
+}
+
+// 위의 작업이 3줄이 아니라 1억줄에 이르는 작업을 수행한다면?
+// 혼자가 아니라 수많은 사람들이 엄청나게 많이 사용하는 작업이라면?
+// 굉장히 오래 걸리는 작업이라서 하염없이 붙잡고 있어야 하는 작업이라면?
+
+// 프로그래밍의 효과 - 순차적으로 실행이되는 것을 통해서 사람이 잘 못하는 일을 기계에게 위임해서 자동화할 수 있다
+
+// 다른 사람이 만든 자바 파일을 가져오는 방법은 복사해서 붙이면 돼
+
+import org.opentutorials.iot.Elevator;
+import org.opentutorials.iot.Lighting;
+import org.opentutorials.iot.Security;
+
+public class OkJavaGoInHome {
+
+	public static void main(String[] args) {
+		
+		String id = "JAVA APT 507";
+		
+		// Elevator call
+		Elevator myElevator = new Elevator("JAVA APT 507");
+		myElevator.callForUp(1);
+		
+		// Security off
+		Security mySecurity = new Security("JAVA APT 507");
+		mySecurity.off();
+		
+		// Light on
+		Lighting hallLamp = new Lighting(id+" / Hall Lamp");
+		hallLamp.on();
+		
+		Lighting floorLamp = new Lighting(id+" / floorLamp");
+		floorLamp.on();
+
+	}
+
+}
+
+// 이클립스에서 디버거 이용하기
+
+// 브레이크 포인트 - 브레이크 포인트까지 코드가 실행되고 그 이후로 실행이 일시정지 되게 해줌, 다시 클릭하면 지울 수 있음
+// Step over - 다음 줄에 브레이크 포인트 생성, 그 지점까지만 코드가 실행됨
+// Terminate - Debug 중단 
+// Step into - 코드의 자세한 실행 과정을 들여다볼 수 있음
+// Step over - 한 줄을 실행 함수가 있어도 실행 후 다음으로 넘어감
+// Step out - 함수를 끝까지 실행시키고 호출시킨 곳으로 되돌아 감
+// Step return - 원래의 코드로 돌아가고자 할 경우에 클릭하여 돌아감
+// resume - 다음 브레이크포인트를 만날 때까지 실행
+// 우측의 Variable 탭에서 변수들을 확인 가능
