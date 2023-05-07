@@ -235,3 +235,90 @@ public class OkJavaGoInHome {
 // Step return - 원래의 코드로 돌아가고자 할 경우에 클릭하여 돌아감
 // resume - 다음 브레이크포인트를 만날 때까지 실행
 // 우측의 Variable 탭에서 변수들을 확인 가능
+
+
+5/4 4일차
+
+import javax.swing.JOptionPane;
+
+import org.opentutorials.iot.DimmingLights;
+import org.opentutorials.iot.Elevator;
+import org.opentutorials.iot.Lighting;
+import org.opentutorials.iot.Security;
+
+public class OkJavaGoInHomeInput {
+
+	public static void main(String[] args) {
+		
+		String id = JOptionPane.showInputDialog("Enter a ID"); // 입력값을 받을 수 있음 
+		String bright = JOptionPane.showInputDialog("Enter a Bright level");
+		
+		// Elevator call 
+		Elevator myElevator = new Elevator(id);
+		myElevator.callForUp(1);
+		
+		// Security off 
+		Security mySecurity = new Security(id);
+		mySecurity.off();
+		
+		// Light on
+		Lighting hallLamp = new Lighting(id+" / Hall Lamp");
+		hallLamp.on();
+		
+		Lighting floorLamp = new Lighting(id+" / floorLamp");
+		floorLamp.on();
+		
+	    DimmingLights moodLamp = new DimmingLights(id+" moodLamp");
+	    moodLamp.setBright(Double.parseDouble(bright)); // 문자열을 double로 데이터 타입을 변환함 
+	    moodLamp.on();
+
+	}
+
+}
+
+import javax.swing.JOptionPane;
+
+import org.opentutorials.iot.DimmingLights;
+import org.opentutorials.iot.Elevator;
+import org.opentutorials.iot.Lighting;
+import org.opentutorials.iot.Security;
+
+public class OkJavaGoInHomeInput {
+
+	// parameter, 매개변수 
+	public static void main(String[] args) {
+		
+		String id = args[0];
+		String bright = args[1];
+		
+		// Elevator call 
+		Elevator myElevator = new Elevator(id);
+		myElevator.callForUp(1);
+		
+		// Security off 
+		Security mySecurity = new Security(id);
+		mySecurity.off();
+		
+		// Light on
+		Lighting hallLamp = new Lighting(id+" / Hall Lamp");
+		hallLamp.on();
+		
+		Lighting floorLamp = new Lighting(id+" / floorLamp");
+		floorLamp.on();
+		
+	    DimmingLights moodLamp = new DimmingLights(id+" moodLamp");
+	    moodLamp.setBright(Double.parseDouble(bright)); // 문자열을 double로 데이터 타입을 변환함 
+	    moodLamp.on();
+
+	}
+
+}
+
+// Run 버튼의 팝업 버튼을 클릭하여 Run Configurations 메뉴를 클릭
+// Argument 탭에서 Program arguments에 원하는 값을 입력 - 아규먼트를 입력하게 되면 main 메소드의 args 파라미터는 아규먼트 값을 받아서 동작하게 된다
+
+// args - 문자열 배열로 여러 개의 String 데이터가 들어있을 수 있음, 인덱스를 통해 배열의 데이터를 꺼내 쓸 수 있고, 인덱스는 0부터 시작함
+
+// 이클립스 없이 자바로 프로그래밍하는 법을 배워보기
+// PATH (환경변수)- 디렉터리 경로의 목록
+// 직접 컴파일 실행하는 방법을 보았음
