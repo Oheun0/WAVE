@@ -322,3 +322,131 @@ public class OkJavaGoInHomeInput {
 // 이클립스 없이 자바로 프로그래밍하는 법을 배워보기
 // PATH (환경변수)- 디렉터리 경로의 목록
 // 직접 컴파일 실행하는 방법을 보았음
+
+
+5/5 5일차
+
+// 자바의 라이브러리 도구 - System, Data, Math, PrintWriter 등이 있음
+// 작업들의 시간적 순서에 주목해서 우리는 Program이라고 부르고, 도구의 응용에 주목해서 우리는 Application이라고 부름
+// 자바 API(Application Programming Interface) -  자바의 도구들을 응용해서 사용하기 위해서 일정한 조작 장치를 구성, 자바 프로그램은 또 다른 자바 프로그램에서 사용될 수도 있고,다른 프로그램에서 사용할 수 있도록 만들어둔 장치
+// UI(User Interface) - 사용자가 자바 프로그램을 사용할 수 있도록 만들어둔 장치 (예: 커맨드 라인 시스템의 아규먼트, 데스크톱 앱의 버튼, 웹 페이지의 링크 등)
+
+// Java API documentation 보는 방법 
+// 포털검색을 통해 Java API documentation 페이지를 열기 - 왼쪽 위 : 패키지들에 대한 정보, 왼쪽 아래 : 클래스에 대한 정보
+// Math 클래스 안에는 PI와 같은 변수, floor,ceil과 같은 메소드들이 포함되어 있음 패키지는 이러한 클래스들을 하나의 묶음으로 정리한 것
+
+public class ClassApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(Math.PI);
+		System.out.println(Math.floor(1.6));
+		System.out.println(Math.ceil(1.6));
+
+	}
+
+}
+
+// Math 클래스에는 수학과 관련된 여러 변수들과 메소드들이 있음
+// PI 변수는 원주율이 적절한 정밀도로 저장되어 있는 변수
+// floor 메소드는 특정 소수점 이하에 대해서 버림한 값을 산출
+// ceil 메소드는 특정 소수점 이하에 대해서 올림한 값을 산출
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class InstanceApp {
+
+	public static void main(String[] args) throws IOException{
+		
+		PrintWriter p1 = new PrintWriter("result1.txt");
+		p1.write("Hello 1");
+		p1.close();
+		
+		PrintWriter p2 = new PrintWriter("result2.txt");
+		p2.write("Hello 2");
+		p2.close();
+		System.out.println(p1.toString());
+		p2.toString();
+		p2.write("Hello 2");
+		
+		
+//		PrintWriter.write("result1.txt", "Hello 1");	
+//		PrintWriter.write("result2.txt", "Hello 2");
+//		PrintWriter.write("result1.txt", "Hello 1");	
+//		PrintWriter.write("result2.txt", "Hello 2");
+//		PrintWriter.write("result1.txt", "Hello 1");	
+//		PrintWriter.write("result2.txt", "Hello 2");
+//		PrintWriter.write("result1.txt", "Hello 1");	
+//		PrintWriter.write("result2.txt", "Hello 2");
+//		PrintWriter.write("result1.txt", "Hello 1");	
+//		PrintWriter.write("result2.txt", "Hello 2");
+//		PrintWriter.write("result1.txt", "Hello 1");	
+//		PrintWriter.write("result2.txt", "Hello 2");
+//		PrintWriter.write("result1.txt", "Hello 1");	
+//		PrintWriter.write("result2.txt", "Hello 2");
+	}
+
+}
+
+// 인스턴스를 만드는 이유
+// 인스턴스를 만들지 않고 PrintWriter.weite("파일이름", "쓸 내용"); 이렇게 구현하면? - 여러 파일에 반복적으로 여러 내용을 쓰는 상황이리고 가정 -> 한번 파일에 쓰기 작업을 수행할 떄마다 일일이 파일의 이름을 입력해 줘야 한다는 단점이 있음
+// 인스턴스는 객체를 다양한 상태에서 사용하고, 기능을 재사용할 경우가 많은 상황에서 유용한 방식임
+
+// 클래스의 상속관계 - 클래스 간에는 서로 계층적인 관계를 갖고 있을 수 있음
+// 클래스 간의 상속관계의 특성 - 자식에 해당하는 클래스는 부모에 해당하는 클래스의 모든 변수와 메소드를 사용할 수 있음
+// Open Type hierarchy : 이클립스 안에서 클래스의 상속관계 확인 가능
+
+// 나의 앱 만들기
+
+public class AccountingApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Value of supply : "+12345.0);
+		System.out.println("VAT : "+ (12345.0*0.1));
+		System.out.println("Total : "+ (12345.0 + 12345.0*0.1) );
+		System.out.println("Expense : "+ (12345.0*0.3) );
+		System.out.println("Income : "+ (12345.0 - 12345.0*0.3) );
+		System.out.println("Dividend 1 : "+ (12345.0 - 12345.0*0.3) * 0.5 );
+		System.out.println("Dividend 2 : "+ (12345.0 - 12345.0*0.3) * 0.3 );
+		System.out.println("Dividend 3 : "+ (12345.0 - 12345.0*0.3) * 0.2 );
+
+		// Edit - find/replace 기능을 사용하여 가격을 바꿀 수 있음
+		// 위는 find/replace 기능으로 10000.0 -> 12345.0 으로 바꾼 것임
+
+	// 변수도입
+
+public class AccountingApp {
+
+	public static void main(String[] args) {
+
+		double valueOfSupply = Double.parseDouble(args[0]);
+		double vatRate = 0.1;
+		double expenseRate = 0.3;
+		double vat = valueOfSupply * vatRate;
+		double total = valueOfSupply + vat;
+		double expense = valueOfSupply * expenseRate;
+		double income = valueOfSupply - expense;
+		double dividend1 = income * 0.5;
+		double dividend2 = income * 0.3;
+		double dividend3 = income * 0.2;
+
+		System.out.println("Value of supply : " + valueOfSupply);
+		System.out.println("VAT : " + vat);
+		System.out.println("Total : " + total);
+		System.out.println("Expense : " + expense);
+		System.out.println("Income : " + income);
+		System.out.println("Dividend 1 : " + dividend1);
+		System.out.println("Dividend 2 : " + dividend2);
+		System.out.println("Dividend 3 : " + dividend3);
+
+	}
+
+}
+
+// 특정 값을 지역 변수로 바꾸는 방법
+// 특정 값을 블록으로 지정 - Extract Local Variable - Refactor - 변수의 이름을 지정하고 OK 누르기 (OK 옆에 Preview 버튼을 누르면 변수 생성 전후를 비교가능)
+// 변수로 지정하고자 하는 값을 지우고 이름을 바로 입력하면 이클립스에서 변수 생성을 도와줌 (Create local variable 'expenseRate')
+
+// 아규먼트를 받는 프로그램으로 수정하는 방법을 배움
