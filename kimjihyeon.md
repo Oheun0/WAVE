@@ -841,3 +841,365 @@ public class AccountingClassApp {
 
 - 클래스를 복사하지 않아도 인스턴스를 만들어서 표현가능
 
+
+7일차
+=============
+
+> 지난 시간 배운 내용 요약
+  - 프로그램 : 우리가 원하는 작업들을 시간 순서대로 진행되도록 명령하는 것
+  - 조건문 : 조건에 따라서 실행할 작업의 순서를 제어하는 것
+  - 반복문 : 같은 작업을 여러 번 반복할 경우 사용되는 것
+  - 조건문과 반복문을 위해서는 조건을 구성해야 함 -> 조건을 구성하기 위해서 자바에서는 Boolean 데이터 타입과, 비교 연산 기능을 제공함
+
+**Bloolean Datatype**
+
+- reserved word : true, false 는 변수의 이름으로 사용할 수 없음 (이미 쓰임이있는 키워드들, 앞으로 그럴 가능성이 있는 키워드들 이기 때문) 
+
+package java_flow_control;
+
+public class BooleanApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("One");
+		System.out.println(1);
+		
+		System.out.println(true);
+		System.out.println(false);
+		
+		String foo = "Hello world";
+		// String true = "Hello world"; reserved word
+		
+		System.out.println(foo.contains("world"));
+		System.out.println(foo.contains("egoing"));
+
+	}
+
+}
+
+*Boolean 데이터 타입*
+- 참과 거짓을 표현하는 데이터 타입
+- true와 false 키워드를 이용하여 직접 입력할 수도 있고 메소드의 리턴 값이나 비교 연산으로 도출할 수 있음
+- 문자열 객체의 contains 메소드와 같이 결과값이 boolean 데이터 타입인 경우, 또는 비교 연산자를 이용해서 계산하는 경우에도 boolean 데이터 타입을 다루게 됨
+
+**비교 연산자**
+- 값의 대소, 같음을 비교하는 연산자
+- 부등호, 등호와 같은 역할을 함
+
+public class ComparisonOperatorApp {
+
+	public static void main(String[] args) {
+		
+		
+		System.out.println(1 > 1); // false
+		System.out.println(1 == 1); // true
+		System.out.println(1 < 1); 
+		System.out.println(1 >= 1);
+
+	}
+
+}
+
+> 비교 연산자 종류 
+  + a > b : a가 b보다 큼
+  + a < b : a가 b보다 작음
+  + a >= b : a가 b보다 크거나 같음
+  + a <= b : a가 b보다 작거나 같음
+  + a == b : a가 b와 같음
+  + a != b : a가 b와 같지 않음
+  (참이라면 true, 거짓이라면 false를 산출)
+
+**if문**
+- 제어문의 하나로 조건에 따라 작업을 실행하거나 실행하지 않게 만들어줌
+
+> if문의 구성 요소 
+  - if
+  - 조건식
+  - 코드블럭 (실행할 코드)
+  - else if
+  - else
+  (if와 조건식이 필수 구성 요소, 나머지는 필수요소 아님)
+  *조건식에는 boolean 타입만 들어갈 수 있음*
+
+public class IfApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println("a");
+		if(false) {
+		    System.out.println(1);
+		} else if(true) {
+		    System.out.println(2);
+		} else {
+			System.out.println(3);
+		}
+		System.out.println("b");
+	}
+
+}
+
+* 조건문은 중첩할 수 있고, if와 else는 하나의 조건문에 한 번만 들어갈 수 있지만, else if는 여러 개가 들어갈 수 있음
+
+**조건문 응용1**
+- String 클래스의 boolean 리턴 메소드인 equals 메소드를 이용해서 간단한 인증 기능을 구현해봄
+
+package java_flow_control;
+
+public class AuthApp {
+
+	public static void main(String[] args) {
+		
+		String id = "egoing";
+		String inputId = args[0];
+		
+		System.out.println("Hi.");
+		
+		//if(inputId == id) {
+		if(inputId.equals(id)) {
+			System.out.println("Master!");
+		} else {
+			System.out.println("Who are you?");
+		}
+		
+
+	}
+
+}
+
+- ==와 같은 비교 연산자는 기본 데이터 형과는 달리 문자열과 같은 객체에는 의도치 않은 결과를 가져올 수 있음 그래서 문자열이 서로 같은지를 비교하기 위해서 String 객체에서는 equals 메소드를 제공하고 있음
+- 조건식을 비교 연산자나 메소드를 통해 구성하게 되면, 미리 정해놓은 조건이 아니라 *프로그램이 돌아가는 동안*에 정해진 조건에서 특정 작업을 실행할 수 있게 함
+
+**조건문 응용2**
+
+*맥에서 주석처리 하는 방법 - command + /*
+
+package java_flow_control;
+
+public class AuthApp {
+
+	public static void main(String[] args) {
+		
+		String id = "egoing";
+		String inputId = args[0];
+		
+		String pass = "1111";
+		String inputPass = args[1];
+		
+		System.out.println("Hi.");
+		
+		//if(inputId == id) {
+//		if(inputId.equals(id)) {
+//			if(inputPass.equals(pass)) {
+//			    System.out.println("Master!");
+//		    } else {
+//			    System.out.println("Wrong password!");
+//		    }
+//		} else {
+//			System.out.println("Who are you?");
+//		}
+		
+		if(inputId.equals(id) && inputPass.equals(pass)) {
+			System.out.println("Master!");
+		} else {
+			System.out.println("Who are you?");
+		}
+		
+
+	}
+
+}
+* 아이디와 패스워드가 모두 같은지 확인하기 위해서는 AND 연산자 사용
+
+- 여러 개의 boolean 데이터에 대해 모두 혹은 일부가 참인지 알아보려면? -> 조건 연산자 사용
+
+*조건 연산자의 종류*
+- &&(AND)
+- ||(OR)
+* && 연산자는 전항과 후항이 모두 참일 경우에만 참을 반환, 아니면 거짓을 반환
+* || 연산자는 전항과 후항 중 하나라도 참일 경우에 참을 반환, 모두 거짓일 때에만 거짓을 반환
+* && 연산자는 || 연산자보다 우선순위가 높음
+
+**== VS equals**
+
+*원시 데이터 타입*
+- boolean, byte, char, short, int, long, float, double (8개)
+- 원시 데이터 타입의 변수는 선언되면 메모리(Stack)에 공간이 할당되며, 그 메모리 공간 안에 실제 값이 들어가게 됨
+- 원시 데이터의 경우 == 연산자는 변수가 가리키는 값을 토대로 비교하게 됨
+
+*원시 데이터 타입이 아닌 것*
+- java.lang.Object 클래스를 비롯해 여기에서 파생된 다른 모든 클래스들
+- 클래스는 new 키워드를 통한 인스턴스가 만들어지는 시점에 또다른 메모리 구역(Heap)에서 새로운 공간을 할당하여 값을 저장하고 변수는 그 값이 저장된 메모리의 주소를 가리키게 됨
+- 인스턴스 간 == 연산자를 이용할 경우 그 메모리의 주소를 비교하게 됨
+
+*문자열 리터럴과 같은 방식으로 문자열을 생성한 경우*
+String s3 = "JAVA";
+String s4 = "JAVA";
+- 문자열 리터럴로 문자열을 생성할 때, 이미 같은 문자열을 생성한 적이 있다면(s4의 경우) 새로 메모리 공간을 할당하지 않고, 새로운 변수는 기존의 문자열이 저장된 메모리(String Pool(Heap))의 주소를 가리키게 됨
+- 이러한 경우 == 연산자를 이용하였을 때 같은 주소를 가리키고 있기 때문에 true가 나오게 됨
+
+> 즉 == 연산자는 변수가 일차적으로 가리키고 있는 메모리 공간의 값을 기준으로 판단함
+> 반면 equals 메소드는 구현에 따라 다르지만, 변수가 최종적으로 가리키고 있는 값을 기준으로 판단함
+
+  원시데이터 타입이면 == 이거 쓰면 돼
+  원시데이터 타입이 아니면 equals 쓰거나 객체가 서로 같은지 확인하기
+  *간단하게 말해*, == 는 같은 곳에 있냐, equals는 내용이 같으냐
+
+**논리 연산자**
+
+public class LogicalOperatorApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(1 == 1);
+		
+		
+		// AND
+		System.out.println(true && true); // true
+		System.out.println(true && false); // false
+		System.out.println(false && true); // false
+		System.out.println(false && false); //false
+
+		// OR
+		System.out.println(true || true); // true
+		System.out.println(true || false); // true
+		System.out.println(false || true); // true
+		System.out.println(false || false); //false
+		
+		// NOT
+		System.out.println(!true); // false
+		System.out.println(!false); // true
+	}
+
+}
+
+*! 연산자*
+- NOT 연산을 수행하고 참, 거짓 값을 반전시킴
+
+public class AuthApp2 {
+
+	public static void main(String[] args) {
+		
+		String id = "egoing";
+		String inputId = args[0];
+		
+		String pass = "1111";
+		String pass2 = "2222";
+		String inputPass = args[1];
+		
+		
+		System.out.println("Hi.");
+		boolean isRightPass = (inputPass.equals(pass) || inputPass.equals(pass2));
+		if(inputId.equals(id) && isRightPass ) {
+			System.out.println("Master!");
+		} else {
+			System.out.println("Who are you?");
+		}
+
+	}
+
+}
+- 패스워드로 쓸 수 있는 문자열이 1개였지만 2개로 늘어남
+- 패스워드가 둘 중 하나만 충족하면 되므로 || 연산자를 이용, 이 조건을 boolean 변수 isRightPass에 할당하여 간결성있게 구성함
+
+**반복문**
+- 조건에 따라 특정한 작업을 반복하게 하는 제어문
+- while문 for문 등으로 반복문을 구현함
+
+*While문*
+- 조건식이 참일 동안에 코드블럭의 작업을 반복함
+- 조건식에 true를 입력할 경우 조건이 항상 참이기 때문에 무한으로 반복하게 됨
+
+*For문*
+- 조건식이 3개의 부분으로 나뉘어져 있음
+1. 변수의 초기화
+2. 조건식
+3. 1회 반복을 끝내고 수행할 연산
+- 각각의 부분은 세미콜론(;)으로 구분되어 있음
+- 변수의 초기화는 for문이 시작될 때 한 번만 수행되고, 조건식이 참일 경우에만 반복함
+- 1회 반복이 끝나면 (} 부분) 지정한 연산을 처리하고 다시 조건식을 확인하여 반복작업을 실행함
+
+* 변수의 초기화 부분에서 변수를 새로 선언했다면, 그 변수는 for문 안에서만 존재하고 for문을 벗어나면 사라짐
+
+public class LoopApp {
+
+	public static void main(String[] args) {
+		
+		System.out.println(1);
+		System.out.println("=== while ===");
+		int i = 0;
+		//..
+		while(i < 3) {
+		    System.out.println(2);
+		    System.out.println(3);
+//		    i = i + 1;
+		    //..
+		    i++;
+		}
+		System.out.println("=== for ===");
+	    for(int j=0; j < 3; j++) {
+	    	System.out.println(2);
+		    System.out.println(3);
+		}
+
+		System.out.println(4);
+
+	}
+
+}
+
+**배열**
+- 반복문과 같이 사용할 때 사용하기 좋은 데이터 타입
+- 같은 데이터를 여러 개 묶어놓은 형태로, 반복되는 작업을 수행할 때 유용하게 사용할 수 있음
+
+public class ArrayApp {
+
+	public static void main(String[] args) {
+		
+		// egoing, jinhuck, youbin
+//		String users = "egoing, jinhuck, youbin";
+		String[] users = new String[3];
+		users[0] = "egoing";
+		users[1] = "jinhuck";
+		users[2] = "youbin";
+		
+		System.out.println(users[1]);
+		System.out.println(users.length);
+		
+		int[] scores = {10, 100, 100}; // 원소, element
+		System.out.println(scores[1]);
+		System.out.println(scores.length);
+
+	}
+
+}
+
+- 배열을 선언할 때는 변수 타입명 뒤에 빈 [] 대괄호를 입력하고 변수 이름을 입력함
+- 초기화를 할 경우에는 new 키워드를 이용하여 [] 대괄호 안에 요소의 개수를 입력함 또는 리터럴로 입력할 수 있는 데이터 타입의 경우, {} 중괄호 안에 요소를 리터럴로 입력할 수 있음
+
+- 배열은 인덱스를 통해 접근하고 인덱스는 [] 대괄호 안에 입력함
+
+**반복문+배열**
+- 반복문을 이용하여 배열의 요소들에 대해 같은 작업을 수행하는 프로그램 만들기
+
+public class LoopArray {
+
+	public static void main(String[] args) {
+		/*
+		 * <li>egoing</li>
+		 * <li>jinhuck</li>
+		 * <li>youbin</li>
+		 */
+		
+		String[] users = new String[3];
+		users[0] = "egoing";
+		users[1] = "jinhuck";
+		users[2] = "youbin";
+		
+		for(int i=0; i<users.length; i++) {
+			System.out.println(users[i]+",");
+		}
+
+	}
+}
+- 배열도 하나의 객체이기 때문에 여러 필드와 메소드가 담겨 있음
+- 그 중 length 필드는 배열의 요소 개수를 담고 있는 필드임 -> 조건식에서 이 필드를 이용하게 되면 직접 배열의 요소 개수를 입력하지 않아도 프로그램을 실행할 때마다 달라질 수 있는 요소의 개수를 반영하여 반복문을 돌릴 수 있음
