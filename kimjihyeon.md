@@ -1543,3 +1543,173 @@ public class staticMethod {
 
 }
 
+9일차
+=============
+
+**객체 지향 프로그래밍**
+
+- 메소드는 언어마다 메소드(method), 함수(function), 서브루틴(subroutin), 프로시져(procedure)라는 여러 이름으로 불림
+- 이러한 메소드를 중심으로 프로그램을 만들어 나가는 프로그래밍을 절차적 프로그래밍(procedural programming)이라고 함
+
+- 메소드로만 프로그램을 만드는 것에 부족함을 느낌 -> 관련있는 변수와 메소드를 모은 수납상자와 같은 *클래스*라는 개념을 이용하여 프로그램을 정리정돈하는데 이용하게 됨
+- 객체 지향 프로그래밍 : 클래스를 이용해서 프로그램의 구조를 만들어 가는 방식
+- 객체 지향 언어 : 이러한 방식을 언어 차원에서 지원하는 프로그래밍 언어
+
+**클래스와 인스턴스**
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class OthersOOP {
+    
+    public static void main(String[] args) throws IOException {
+        // class : System, Math, FileWriter
+        // instance : f1, f2
+        
+        System.out.println(Math.PI);
+        System.out.println(Math.floor(1.8));
+        System.out.println(Math.ceil(1.8));
+        
+        FileWriter f1 = new FileWriter("data.txt");
+        f1.write("Hello");
+        f1.write(" Java");
+        
+        FileWriter f2 = new FileWriter("data2.txt");
+        f2.write("Hello");
+        f2.write(" Java2");
+        f2.close();
+        
+        f1.write("!!!");
+        f1.close();
+        
+    }
+
+}
+
+- 인스턴스를 생성하여 사용하는 FileWriter 클래스를 이용한 프로그램을 작성해봄
+
+*Math 클래스*
+- floor, ceil 메소드, 클래스의 필드(변수)로 PI 등이 있음
+- 이러한 메소드와 변수는 인스턴스를 생성하지 않더라도 클래스에서 직접적으로 호출할 수 있음
+
+*FileWrier 클래스*
+- 파일을 열어서 원하는 내용을 입력할 수 있는 기능들을 제공함
+- 각각의 파일에 해당하는 인스턴스를 생성하여 write 메소드로 쓰기 작업을 수행하고 close 메소드로 파일을 닫음
+- 이러한 메소드와 변수는 인스턴스를 생성하여 사용하여야 하고 클래스에서 직접적으로 호출할 수 없음
+
+*클래스를 이용해서 정리정돈하는 방법 알아보기*
+
+public class MyOOP {
+	public static String delimiter = "";
+	public static void main(String[] args) {
+		delimiter = "----";
+		printA();
+		printA();
+		printB();
+		printB();
+		
+		delimiter = "****";
+		printA();
+		printA();
+		printB();
+		printB();
+
+	}
+
+	public static void printA() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void printB() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+    
+}
+
+**클래스(존재 이유와 기본형식)**
+
+*클래스의 장점*
+- 관련있는 변수들과 메소드를 묶어서 정리정돈을 할 수 있게 함
+- 의미를 쉽게 유추할 수 있게 됨
++ 이클립스와 같은 IDE 프로그램을 이용하게 되면, 접근할 수 있는 클래스의 메소드, 변수를 추천해주는 기능도 존재 -> 프로그램을 작성한 데에 편의성을 증진시킬 수 있음
+
+class Print{
+	public static String delimiter = "";
+	public static void A() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	public static void B() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+public class MyOOP {
+	public static void main(String[] args) {
+		Print.delimiter = "----";
+	    Print.A();
+	    Print.A();
+		Print.B();
+		Print.B();
+		
+		Print.delimiter = "****";
+		Print.A();
+		Print.A();
+		Print.B();
+		Print.B();
+	}
+
+}
+
+**클래스(형식)**
+- 클래스는 한 파일에 여러 개를 넣을 수 있지만, 접근제어자 public은 java 파일과 같은 이름의 클래스에 하나만 붙일 수 있음
+
+- 지난 시간에 만든 거에서 class Print 부분 선택한 후 Refactor - Move Type... 선택하면 파일을 분리해서 코드를 정리정돈 할 수 있음
+
+**인스턴스**
+- 클래스는 어떠한 형틀이고, 인스턴스는 그 형틀로 찍어낸 실체와도 같은 것 -> 객체를 인스턴스로 만들면, 그 인스턴스를 바꾼다고 해도 다른 인스턴스에는 영향을 끼치지 않게 됨
+
+class Print{
+	public String delimiter = "";
+	
+	public void A() {
+		System.out.println(delimiter);
+		System.out.println("A");
+		System.out.println("A");
+	}
+	
+	public void B() {
+		System.out.println(delimiter);
+		System.out.println("B");
+		System.out.println("B");
+	}
+}
+
+public class MyOOP {
+	public static void main(String[] args) {
+		Print p1 = new Print();
+		p1.delimiter = "****";
+		p1.A();
+		p1.A();
+		p1.B();
+		p1.B();
+		
+		Print p2 = new Print();
+		p2.delimiter = "****";
+		p2.A();
+		p2.A();
+		p2.B();
+		p2.B();
+		
+		p1.A();
+		p2.A();
+		p1.A();
+		p2.A();
+	}
+
+}
