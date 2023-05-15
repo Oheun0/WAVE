@@ -1203,3 +1203,343 @@ public class LoopArray {
 }
 - 배열도 하나의 객체이기 때문에 여러 필드와 메소드가 담겨 있음
 - 그 중 length 필드는 배열의 요소 개수를 담고 있는 필드임 -> 조건식에서 이 필드를 이용하게 되면 직접 배열의 요소 개수를 입력하지 않아도 프로그램을 실행할 때마다 달라질 수 있는 요소의 개수를 반영하여 반복문을 돌릴 수 있음
+
+
+8일차
+=============
+
+**종합응용**
+
+public class AuthApp3 {
+
+	public static void main(String[] args) {
+		
+		String[] users = {"egoing", "jinhuck", "ypubin"};
+		String inputId = args[0];
+		
+		boolean isLogined = false;
+		for(int i=0; i<users.length; i++) {
+			String currentId = users[i];
+			if(currentId.equals(inputId)) {
+				isLogined = true;
+				break;
+			}
+		}
+		System.out.println("Hi,");
+        if(isLogined) {
+        	System.out.println("Master!!");
+        } else {
+        	System.out.println("Who are you?");
+        }
+	}
+
+}
+- 이전에 만들었던 로그인 기능을 좀 더 확장해서, 여러 아이디를 인증할 수 있는 기능을 추가해 봄
+
+*break문*
+- 더 이상 현재 반복문을 진행하지 않고 빠져나오게 하는 구문
+- 배열에 요소들이 더 남아 있다고 할지라도 break문을 만나면 더 이상 추가적인 연산을 수행하지 않고 현재 반복문의 코드블럭 밖으로 빠져나옴
+
+
+public class AuthApp3 {
+
+	public static void main(String[] args) {
+		
+//		String[] users = {"egoing", "jinhuck", "ypubin"};
+		String[][] users = {
+				{"egoing", "1111"},
+				{"jinhuck", "2222"},
+				{"youbin", "3333"}
+		};
+		String inputId = args[0];
+		String inputPass = args[1];
+		
+		boolean isLogined = false;
+		for(int i=0; i<users.length; i++) {
+			String[] current = users[i];
+			if(
+					current[0].equals(inputId) &&
+					current[1].equals(inputPass)
+			) {
+				isLogined = true;
+				break;
+			}
+		}
+		System.out.println("Hi,");
+        if(isLogined) {
+        	System.out.println("Master!!");
+        } else {
+        	System.out.println("Who are you?");
+        }
+	}
+
+}
+
+*이차원 배열*
+- 인덱스를 이용하여 접근할 경우 행, 열의 순서로 접근함
+- "egoing" 문자열은 users[0][0]이고, "3333" 문자열은 users[2][1]로 접근함
+- 또한 users[0]은 String 객체가 아닌 String[]객체, 즉 일차원 배열임
+
+**JAVA 메소드**
+
+*메소드*
+- 메소드는 클래스와 관련된 작업을 하는 함수이다
+- 수학에서의 함수와 같이 인자를 받아서 어떤 값을 도출하는 역할을 함
+- 메소드를 이용하여 코드를 정리정돈하고 재사용성을 높일 수 있는 방법에 대해서 알아본다
+
+> 지금까지 사용해 왔던 메소드를 떠올려 봄
+  - 제어문에서 문자열을 비교하는데 사용했던 equals 메소드, contains 메소드
+  - Math 클래스의 floor 메소드 등
+  - 실습을 할 때마다 사용해 왔던 특수한 메소드인 main 메소드도 있음
+  - main 메소드는 특수한 메소드로, 우리가 클래스를 실행할 때 어떠한 명령을 더 내리지 않아도 main 메소드를 실행함
+
+
+public class WhyMethod {
+	public static void printTwoTimesA() {
+		System.out.println("-");
+		System.out.println("a");
+		System.out.println("a");
+	}
+
+	public static void main(String[] args) {
+		
+		// 100000000
+		printTwoTimesA();
+		// 100000000
+		printTwoTimesA();
+		// 100000000
+		printTwoTimesA();
+		
+	}
+
+}
+
+*메소드의 필요성*
+- 메소드를 이용할 경우 쉽게 같은 코드를 재사용하고, 유지보수를 쉽게 할 수 있음
+
+* 메소드 추출을 원하는 부분을 블록으로 지정하여 우클릭 후 Refactor -> Extract Method 를 클릭한 후 나오는 창에서 메소드 이름 입력하면 메소드 추출가능(여기서 Preview 누르면 미리 바뀔 모습 확인 가능)
+
+*메소드의 입력*
+
+- 파라미터를 통해 우리가 원하는 문자열과 구분자를 출력하는 메소드를 만들어 봄
+
+public class WhyMethod {
+
+	public static void main(String[] args) {
+		
+		              // 인자, argument 
+		printTwoTimesA("a", "-");
+		// 100000000
+		printTwoTimesA("a", "*");
+		// 100000000
+		printTwoTimesA("a", "&");
+		printTwoTimesA("b", "!");
+		
+	}
+                                     // 매개변수, parameter
+	public static void printTwoTimesA(String text, String delimiter) {
+		System.out.println("-");
+		System.out.println(text);
+		System.out.println(text);
+	}
+
+}
+
+- 매개변수(파라미터)는 메소드 안에서 통용되는 변수
+- 메소드를 호출할 때는 실제 데이터를 메소드의 파라미터 안에 넣게 되는데, 이를 인자(아규먼트)라고 함
+
+*메소드의 출력*
+
+public class OutputMethod {
+	
+	public static String a() {
+		//..
+		return "a";
+	}
+	
+	public static int one() {
+		return 1;
+		//...
+	}
+
+	public static void main(String[] args) {
+		
+		System.out.println(a());
+		System.out.println(one());
+
+	}
+
+}
+> 메소드가 문자열 객체를 반환하도록 만들기
+  - 구성 요소(반환되는 데이터의 타입, return) 필요
+  - 반환되는 데이터의 타입 -> 메소드의 이름 앞에 넣어서 이 메소드가 그 데이터 타입을 반환한다는 것을 명시 (만약 메소드가 아무것도 반환하지 않는다면 void를 넣어 두기) 
+  - return -> 우리가 작업을 처리한 후 반환하고자 하는 데이터를 'return 반환값' 형식으로 입력하여 메소드가 데이터를 반환하도록 함
+ - return이 실행된 후에는 그 뒤에 실행할 코드가 메소드에 남아 있어도 더 처리하지 않고 바로 메소드를 빠져 나옴
+
+ import java.io.FileWriter;
+import java.io.IOException;
+
+public class WhyMethod {
+
+	public static void main(String[] args) throws IOException {
+	
+		System.out.println(twoTimes("a", "-"));
+		FileWriter fw = new FileWriter("out.txt");
+		fw.write(twoTimes("a", "*"));
+		fw.close();
+//		Email.send("egoing@a.com", "two times a", twotimes("a", "&"));
+		
+	}
+	public static String twoTimes(String text, String delimiter) {
+		String out = "";
+		out = out + delimiter + "\n";
+		out = out + text + "\n";
+		out = out + text + "\n";
+		return out;
+	}
+
+}
+
+*메소드의 활용*
+
+public class AccountingApp {
+
+	public static void main(String[] args) {
+		// 공급가액 
+		double valueOfSupply = 10000.0;
+		
+		// 부가가치세율 
+		double vatRate = 0.1;
+		// 부가세 
+		double vat = valueOfSupply * vatRate;
+		// 합계 
+		double total = valueOfSupply + vat;
+
+		System.out.println("Value of supply : " + valueOfSupply);
+		System.out.println("VAT : " + vat);
+		System.out.println("Total : " + total);
+
+	}
+
+}
+
+public class AccountingApp {
+	// 공급가액 
+	public static double valueOfSupply = 10000.0;
+	// 부가가치세율 
+	public static double vatRate = 0.1;
+			
+	public static double getVAT() {
+		return valueOfSupply * vatRate;
+	}
+	
+	public static double getTotal() {
+		return valueOfSupply + getVAT();
+	}
+
+	public static void main(String[] args) {
+	
+		// 부가세 
+		double vat = getVAT();
+		// 합계 
+		double total = getTotal();
+
+		System.out.println("Value of supply : " + valueOfSupply);
+		System.out.println("VAT : " + vat);
+		System.out.println("Total : " + total);
+
+	}
+
+}
+
+- 메소드 안에서 메소드를 호출할 수 있음
+- 재사용성이 훨씬 높아진다는 걸 알 수 있음
+
+*다음에 무엇을 더 배우면 좋을지*
+- 클래스 : 비슷한 연관된 일을 하는 메소드와 변수들을 묶어 그룹으로 만든 것
+- 인스턴스 : 클래스를 틀로 하여 실제로 프로그램에서 동작하는 객체들
+- 객체 지향 프로그래밍 : 이러한 객체를 뼈대로 해서 프로그램을 만들어 가는 방식
+
+**access level modifiers**
+*접근 제어에 대해서 알아봄*
+
+*public의 역할에 대해*
+public class AccessLevelModifiersMethod {
+    // public, protected, default, private
+	public static void hi() {
+		System.out.println("Hi");
+	}
+	
+	public static void main(String[] args) {
+		hi();
+	}
+
+}
+- private 메소드 hi가 다른 클래스에 있는 메소드라면 main 메소드에서 잘 움직일까?
+
+class Greeting{
+	private static void hi() {
+		System.out.println("Hi");
+	}
+}
+public class AccessLevelModifiersMethod {
+	
+	public static void main(String[] args) {
+		Greeting.hi();
+	}
+
+}
+- Greeting 클래스에 private 메소드 hi를 만들게 되면, main 메소드는 오류를 내게 됨 -> hi는 Greeting 클래스 밖에서 직접 접근해서 사용할 수 없기 때문 (이것이 private의 접근 권한)
+
+- hi 메소드를 public로 전환한다면, 잘 실행되는 것을 볼 수 있음 -> public은 클래스 외부에서도 바로 접근해서 사용할 수 있음
+
+* private : 동작을 위해 꼭 필요하지만, 외부에서 굳이 알 필요도 없거나 알아서는 안되는 것들을 위해서 지정함
+
+**static**
+> 클래스와 인스턴스의 차이
+  - 클래스는 일종의 형틀, 인스턴스는 그 형틀로 찍어서 만든 실체
+- static 메소드와 아닌 메소드는 클래스의 메소드인지, 인스턴스의 메소드인지에 대한 것
+
+class Print {
+	    public String delimiter;
+		public void a() {
+			System.out.println(this.delimiter);
+			System.out.println("a");
+			System.out.println("a");
+		}
+		public void b() {
+			System.out.println(this.delimiter);
+			System.out.println("b");
+			System.out.println("b");
+		}
+		public static void c(String delimiter) {
+			System.out.println(delimiter);
+			System.out.println("b");
+			System.out.println("b");
+		}
+}
+public class staticMethod {
+
+	public static void main(String[] args) {
+//		Print.a("-");
+//		Print.b("-");
+		
+		// instance
+		Print t1 = new Print();
+		t1.delimiter = "-";
+		t1.a();;
+		t1.b();
+		Print.c("$");
+	
+		
+//		Print.a("*");
+//		Print.b("*");
+		Print t2 = new Print();
+		t2.delimiter = "*";
+		t2.a();;
+		t2.b();
+		
+	}
+
+}
+
